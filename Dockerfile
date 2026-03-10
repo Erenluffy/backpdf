@@ -4,6 +4,7 @@ RUN apt-get update && apt-get install -y \
     poppler-utils \
     ghostscript \
     qpdf \
+    imagemagick \
     tesseract-ocr \
     tesseract-ocr-eng \
     tesseract-ocr-fra \

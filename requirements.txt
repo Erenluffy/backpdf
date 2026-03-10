@@ -1,0 +1,18 @@
+# backend/requirements.txt
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-multipart==0.0.6
+PyPDF2==3.0.1
+pdf2image==1.16.3
+pdf2docx==0.5.8
+reportlab==4.0.9
+Pillow==10.1.0
+img2pdf==0.4.9
+Wand==0.6.11
+pytesseract==0.3.10
+python-docx==1.1.0
+openpyxl==3.1.2
+python-pptx==0.6.21
+weasyprint==60.2
+googletrans==4.0.0rc1
+aiofiles==23.2.1

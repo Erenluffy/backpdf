@@ -456,7 +456,36 @@ async def protect_pdf(input_path: Path, output_path: Path,
     except Exception as e:
         logger.error(f"Protect failed: {e}")
         raise
+async def convert_to_pdfa(input_path: Path, output_path: Path) -> dict:
+    """Convert PDF to PDF/A using Ghostscript"""
+    try:
+        cmd = [
+            "gs",
+            "-dPDFA=2",
+            "-dBATCH",
+            "-dNOPAUSE",
+            "-sDEVICE=pdfwrite",
+            "-dCompatibilityLevel=1.4",
+            f"-sOutputFile={output_path}",
+            str(input_path)
+        ]
 
+        process = await asyncio.create_subprocess_exec(
+            *cmd,
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE
+        )
+
+        await process.communicate()
+
+        return {
+            "success": True,
+            "output": str(output_path)
+        }
+
+    except Exception as e:
+        logger.error(f"PDF/A conversion failed: {e}")
+        raise
 # ==================== ADVANCED FEATURES ====================
 
 async def ocr_pdf(input_path: Path, output_path: Path, language: str, dpi: int) -> dict:

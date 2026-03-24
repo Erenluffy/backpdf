@@ -1,10 +1,9 @@
-# backend/docker-compose.yml
 version: '3.8'
 
 services:
   pdf-backend:
     build: .
-    container_name: pdflab-backend
+    container_name: kirnim-pdf-backend
     ports:
       - "8000:8000"
     volumes:
@@ -13,9 +12,16 @@ services:
     environment:
       - MAX_FILE_SIZE=100MB
       - CLEANUP_HOURS=1
+      - TESSDATA_PREFIX=/usr/share/tesseract-ocr/4.00/tessdata
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/v1/tools/health"]
       interval: 30s
       timeout: 10s
       retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 1G
